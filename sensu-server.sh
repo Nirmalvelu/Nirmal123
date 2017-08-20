@@ -7,12 +7,10 @@ wget -q http://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add
 #Creating an APT configuration file at /etc/apt/sources.list.d/sensu.list
 
 echo "deb http://sensu.global.ssl.fastly.net/apt sensu main" | tee /etc/apt/sources.list.d/sensu.list
-
 apt-get update && apt-get install sensu
 
 #Client configuration
 publicip='curl icanhazip.com'
-
 cat > /etc/sensu/conf.d/client.json <<EOF
 
 {
@@ -70,7 +68,6 @@ EOF
 #Installing a redis server
 
 apt-get -y install redis-server
-
 cat > /etc/sensu/conf.d/redis.json <<EOF
 
 {
@@ -86,19 +83,14 @@ EOF
 #Erlang Installation
 
 wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-
 dpkg -i erlang-solutions_1.0_all.deb
-
 apt-get -y update
-
 apt-get -y install erlang-nox
 
 #Rabbitmq Installation
 
 wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server_3.6.0-1_all.deb
-
 dpkg -i rabbitmq-server_3.6.0-1_all.deb
-
 cat > /etc/sensu/conf.d/rabbitmq.json <<EOF
 
 {
@@ -127,7 +119,6 @@ set_permissions -p /sensu sensu ".*" ".*" ".*"
 #Uchiwa Installation
 
 apt-get install uchiwa
-
 cd /etc/sensu/uchiwa.json
 mv uchiwa.json uchiwa.json.bkg
 
